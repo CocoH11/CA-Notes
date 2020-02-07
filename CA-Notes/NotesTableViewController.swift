@@ -10,11 +10,11 @@ import UIKit
 
 class NotesTableViewController: UITableViewController {
     var notes: [Note] = [
-        Note(titre: "On", contenu: "AHAHA", date: new Date("11-11-2000")),
-        Note(titre: "Est", contenu: "OHOHOH", date: new Date("")),
-        Note(titre: "Dans", contenu: "IHIHIH", date: new Date("")),
-        Note(titre: "La", contenu: "EHEHEHE", date: new Date("")),
-        Note(titre: "Panade", contenu: "UHUHUH", date: new Date(""))
+        Note(titre: "On", contenu: "AHAHA", datestr: "11/11/2000 08:46"),
+        Note(titre: "Est", contenu: "OHOHOH", datestr: "11/11/2000 08:46"),
+        Note(titre: "Dans", contenu: "IHIHIH", datestr: "11/11/2000 08:46"),
+        Note(titre: "La", contenu: "EHEHEHE", datestr: "11/11/2000 08:46"),
+        Note(titre: "Panade", contenu: "UHUHUH", datestr: "11/11/2000 08:46")
         
     ]
 
@@ -32,23 +32,21 @@ class NotesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return notes.count;
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath)
+        let note = notes[indexPath.row]
+        cell.textLabel?.text = note.titre;
+        cell.detailTextLabel?.text = note.convertDateToStr();
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -70,12 +68,14 @@ class NotesTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+        let moveNote = notes.remove(at: fromIndexPath.row)
+        notes.insert(moveNote, at: to.row)
+        tableView.reloadData()
     }
-    */
+    
 
     /*
     // Override to support conditional rearranging of the table view.

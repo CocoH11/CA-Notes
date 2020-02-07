@@ -11,12 +11,26 @@ import Foundation
 class Note {
     var titre: String
     var contenu: String
-    var date: Date
+    var dateNote: Date
     //var localisation
     
-    init(titre:String, contenu:String, date:Date ) {
+    init(titre:String, contenu:String, datestr:String ) {
         self.titre=titre;
         self.contenu=contenu;
-        self.date=date;
+        self.dateNote = Date();
+        dateNote=convertStrToDate(datestr: datestr);
+    }
+    
+    func convertStrToDate(datestr:String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy HH:mm";
+        return formatter.date(from: datestr)!;
+    }
+    
+    func convertDateToStr() -> String {
+        let formatter = DateFormatter();
+        formatter.dateFormat = "dd/MM/yyyy HH:mm";
+        return formatter.string(from: dateNote);
+        
     }
 }
