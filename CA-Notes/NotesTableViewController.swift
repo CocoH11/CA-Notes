@@ -25,7 +25,7 @@ class NotesTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -56,17 +56,17 @@ class NotesTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            notes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     
     // Override to support rearranging the table view.
@@ -85,14 +85,38 @@ class NotesTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
-
+    @IBAction func UnwindToNote(segue: UIStoryboardSegue) {
+        if segue.identifier == "SaveUnwind" {
+            let sourceViewController = segue.source as! AddEditNoteTableViewController
+            if let note = sourceViewController.note {
+                if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                    notes[selectedIndexPath.row] = note
+                    tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+                } else {
+                    let newIndexPath = IndexPath(row: notes.count, section: 0)
+                    notes.append(note)
+                    tableView.insertRows(at: [newIndexPath], with: .automatic)
+                }
+            }
+        }
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editNote" {
+            let indexPath = tableView.indexPathForSelectedRow!
+            let note = notes[indexPath.row]
+            
+            let navigationController = segue.destination as! UINavigationController
+            let addEditController = navigationController.topViewController as! AddEditNoteTableViewController
+            
+            addEditController.note = note
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }

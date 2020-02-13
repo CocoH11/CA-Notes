@@ -17,6 +17,7 @@
 		AC0C6E2623EC22C1006ED428 /* CA_NotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0C6E2523EC22C1006ED428 /* CA_NotesUITests.swift */; };
 		AC0C6E3423EC23ED006ED428 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0C6E3323EC23ED006ED428 /* Note.swift */; };
 		AC0C6E3623EC26BB006ED428 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0C6E3523EC26BB006ED428 /* NotesTableViewController.swift */; };
+		DDDB392423F40EFE00786ECC /* AddEditNoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB392323F40EFE00786ECC /* AddEditNoteTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		AC0C6E2723EC22C1006ED428 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC0C6E3323EC23ED006ED428 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AC0C6E3523EC26BB006ED428 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
+		DDDB392323F40EFE00786ECC /* AddEditNoteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditNoteTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				AC0C6E0723EC22BF006ED428 /* ViewController.swift */,
 				AC0C6E0923EC22BF006ED428 /* Main.storyboard */,
 				AC0C6E3523EC26BB006ED428 /* NotesTableViewController.swift */,
+				DDDB392323F40EFE00786ECC /* AddEditNoteTableViewController.swift */,
 				AC0C6E3323EC23ED006ED428 /* Note.swift */,
 				AC0C6E0C23EC22C0006ED428 /* Assets.xcassets */,
 				AC0C6E0E23EC22C1006ED428 /* LaunchScreen.storyboard */,
@@ -268,6 +271,7 @@
 				AC0C6E0823EC22BF006ED428 /* ViewController.swift in Sources */,
 				AC0C6E0423EC22BF006ED428 /* AppDelegate.swift in Sources */,
 				AC0C6E0623EC22BF006ED428 /* SceneDelegate.swift in Sources */,
+				DDDB392423F40EFE00786ECC /* AddEditNoteTableViewController.swift in Sources */,
 				AC0C6E3423EC23ED006ED428 /* Note.swift in Sources */,
 				AC0C6E3623EC26BB006ED428 /* NotesTableViewController.swift in Sources */,
 			);
