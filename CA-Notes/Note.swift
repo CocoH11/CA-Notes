@@ -12,6 +12,7 @@ class Note {
     var titre: String
     var contenu: String
     var dateNote: Date
+    
     //var localisation
     
     init(titre:String, contenu:String, datestr:String ) {
@@ -19,6 +20,12 @@ class Note {
         self.contenu=contenu;
         self.dateNote = Date();
         dateNote=convertStrToDate(datestr: datestr);
+    }
+    
+    init(titre:String, contenu:String, date:Date ) {
+        self.titre=titre;
+        self.contenu=contenu;
+        self.dateNote = date;
     }
     
     func convertStrToDate(datestr:String) -> Date {

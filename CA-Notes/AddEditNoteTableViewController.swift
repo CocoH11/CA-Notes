@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class AddEditNoteTableViewController: UITableViewController {
     
@@ -14,10 +15,12 @@ class AddEditNoteTableViewController: UITableViewController {
     @IBOutlet weak var titreTextField: UITextField!
     @IBOutlet weak var contenuTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var mapView: MKMapView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpMapView()
         if let note = note {
             titreTextField.text = note.titre
             contenuTextField.text = note.contenu
@@ -110,11 +113,56 @@ class AddEditNoteTableViewController: UITableViewController {
             let titre = titreTextField.text ?? ""
             let contenu  = contenuTextField.text ?? ""
             
-            note = Note(titre: titre, contenu: contenu, datestr: "11/11/2000");
+            note = Note(titre: titre, contenu: contenu, date: Date());
         }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
     
+    
+    
+    // MARK: - Localisation
+    
+    fileprivate let locationManager: CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.requestWhenInUseAuthorization()
+        return manager
+    }()
+    
+    func currentLocation() {
+       locationManager.delegate
+       locationManager.desiredAccuracy = kCLLocationAccuracyBest
+       if #available(iOS 11.0, *) {
+          locationManager.showsBackgroundLocationIndicator = true
+       } else {
+          // Fallback on earlier versions
+       }
+       locationManager.startUpdatingLocation()
+    }
+    
+    func setUpMapView() {
+       mapView.showsUserLocation = true
+       mapView.showsCompass = true
+       mapView.showsScale = true
+       currentLocation()
+    }
+    
+    
+    
 
+}
+
+
+extension ViewController: CLLocationManagerDelegate {
+   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+      
+      let location = locations.last! as CLLocation
+      let currentLocation = location.coordinate
+      let coordinateRegion = MKCoordinateRegion(center: currentLocation, latitudinalMeters: 800, longitudinalMeters: 800)
+      mapView.setRegion(coordinateRegion, animated: true)
+      locationManager.stopUpdatingLocation()
+   }
+   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+      print(error.localizedDescription)
+   }
 }

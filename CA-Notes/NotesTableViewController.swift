@@ -11,10 +11,10 @@ import UIKit
 class NotesTableViewController: UITableViewController {
     var notes: [Note] = [
         Note(titre: "On", contenu: "AHAHA", datestr: "11/11/2000 08:46"),
-        Note(titre: "Est", contenu: "OHOHOH", datestr: "11/11/2000 08:46"),
-        Note(titre: "Dans", contenu: "IHIHIH", datestr: "11/11/2000 08:46"),
-        Note(titre: "La", contenu: "EHEHEHE", datestr: "11/11/2000 08:46"),
-        Note(titre: "Panade", contenu: "UHUHUH", datestr: "11/11/2000 08:46")
+        Note(titre: "Est", contenu: "OHOHOH", datestr: "24/11/2000 12:13"),
+        Note(titre: "Dans", contenu: "IHIHIH", datestr: "01/01/2015 07:31"),
+        Note(titre: "La", contenu: "EHEHEHE", datestr: "02/03/1999 21:00"),
+        Note(titre: "Panade", contenu: "UHUHUH", datestr: "31/12/2020 00:00")
         
     ]
 

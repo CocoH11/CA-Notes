@@ -160,6 +160,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="hlg-QO-AGo"/>
                     <connections>
                         <outlet property="contenuTextField" destination="L5M-ij-pNK" id="CQb-0g-f5v"/>
+                        <outlet property="mapView" destination="hyz-wU-kx0" id="Qrt-pk-c4i"/>
                         <outlet property="saveButton" destination="gfT-h3-Owt" id="OZo-b0-dP0"/>
                         <outlet property="titreTextField" destination="3tW-Du-40k" id="9nV-FF-ayp"/>
                     </connections>
