@@ -60,5 +60,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>Privacy — Location Always and When In Use Usage Description </key>
+	<string>cette appli demande la map pour fonctionner.</string>
+	<key>Privacy — Location When In Use Usage Description</key>
+	<string>cette appli demande la map pour fonctionner 2.</string>
 </dict>
 </plist>

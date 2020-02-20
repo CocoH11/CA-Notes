@@ -8,31 +8,44 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class AddEditNoteTableViewController: UITableViewController {
+class AddEditNoteTableViewController: UITableViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     var note: Note?
     @IBOutlet weak var titreTextField: UITextField!
     @IBOutlet weak var contenuTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var mapView: MKMapView!
     
+    // map
+    // https://medium.com/@luc.derosne/démarrez-la-géolocalisation-dans-swift-en-10-points-avec-mapkit-5442c421b16d
+    @IBOutlet weak var mapView: MKMapView!
+    // San José Capitale du Costa Rica
+    var latitudeInit: Double = 9.998784
+    var longitudeInit: Double = -84.204007
+    var coordinateInit :  CLLocationCoordinate2D {
+    return CLLocationCoordinate2D(latitude: latitudeInit, longitude: longitudeInit)
+    }
+    
+    var userPosition :  CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitudeInit, longitude: longitudeInit)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpMapView()
+
         if let note = note {
             titreTextField.text = note.titre
             contenuTextField.text = note.contenu
-            
         }
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         updateSaveButtonState()
+        
+        // map
+        super.viewDidLoad()
+        let span = MKCoordinateSpan(latitudeDelta: 3, longitudeDelta: 3)
+        let region = MKCoordinateRegion(center: coordinateInit, span: span)
+        mapView.setRegion(region, animated: true)
+        mapView.delegate = self
     }
     
     func updateSaveButtonState() {
@@ -119,50 +132,15 @@ class AddEditNoteTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     
-    
-    
-    // MARK: - Localisation
-    
-    fileprivate let locationManager: CLLocationManager = {
-        let manager = CLLocationManager()
-        manager.requestWhenInUseAuthorization()
-        return manager
-    }()
-    
-    func currentLocation() {
-       locationManager.delegate
-       locationManager.desiredAccuracy = kCLLocationAccuracyBest
-       if #available(iOS 11.0, *) {
-          locationManager.showsBackgroundLocationIndicator = true
-       } else {
-          // Fallback on earlier versions
-       }
-       locationManager.startUpdatingLocation()
+    // map
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if locations.count > 0 {
+             if let maPosition = locations.last {
+              //userPosition = maPosition
+             }
+         }
     }
-    
-    func setUpMapView() {
-       mapView.showsUserLocation = true
-       mapView.showsCompass = true
-       mapView.showsScale = true
-       currentLocation()
-    }
-    
-    
-    
-
+  
 }
 
 
-extension ViewController: CLLocationManagerDelegate {
-   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-      
-      let location = locations.last! as CLLocation
-      let currentLocation = location.coordinate
-      let coordinateRegion = MKCoordinateRegion(center: currentLocation, latitudinalMeters: 800, longitudinalMeters: 800)
-      mapView.setRegion(coordinateRegion, animated: true)
-      locationManager.stopUpdatingLocation()
-   }
-   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-      print(error.localizedDescription)
-   }
-}
